@@ -1,10 +1,10 @@
 import { Div } from "./styled"
 
-function Error404() {
+function ProdutosSalgados() {
     return (
         <Div>
-            <div className="containerError404">
-                <h1>Error404</h1>
+            <div className="containerProdutosSalgados">
+                <h1>Produtos Salgados</h1>
                 <p>Area de informação</p>
                 <footer>Area do footer</footer>
             </div>
@@ -12,4 +12,4 @@ function Error404() {
     )
 }
 
-export default Error404;
+export default ProdutosSalgados;

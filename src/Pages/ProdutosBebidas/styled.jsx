@@ -5,17 +5,17 @@ export const Div = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
+    margin: 50px 0px;
     border: 2px solid red;
     
-    div.containerError404{
+    div.containerProdutosBebidas{
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: center;
         
-        height: 70vh;
+        height: 60vh;
         width: 50vw;
         box-shadow: 0px 0px 10px ${colors.PrimeiraCorClara}, 0px 0px 40px ${colors.PrimeiraCorEscura};
 

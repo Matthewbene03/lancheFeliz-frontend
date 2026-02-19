@@ -5,19 +5,18 @@ export const Div = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
-    border: 2px solid red;
+    margin: 50px 0px;
     
-    div.containerError404{
+    div.containerBemVindo{
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: center;
         
-        height: 70vh;
+        height: 60vh;
         width: 50vw;
-        box-shadow: 0px 0px 10px ${colors.PrimeiraCorClara}, 0px 0px 40px ${colors.PrimeiraCorEscura};
-
+        border: 1.5px solid ${colors.PrimeiraCorEscura};
+        border-radius: 10px;
     }
 `;
