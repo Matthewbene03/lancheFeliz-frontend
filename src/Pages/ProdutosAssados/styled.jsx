@@ -8,7 +8,7 @@ export const Div = styled.div`
     margin: 50px 0px;
     border: 2px solid red;
     
-    div.containerProdutosAssados{
+    div.container{
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
@@ -40,7 +40,10 @@ export const Categoria = styled.div`
 export const ContainerCard = styled.div`
     width: 90%;
     overflow: auto;
-    border: 2px solid red;
+
+    p{
+        text-align: center;
+    }
 `;
 
 export const Card = styled.div`
