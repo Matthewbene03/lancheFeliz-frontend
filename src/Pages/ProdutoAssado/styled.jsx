@@ -14,9 +14,9 @@ export const Div = styled.div`
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         
-        gap: 50px;
+        padding: 15px;
         height: 60vh;
         width: 50vw;
         box-shadow: 0px 0px 40px ${colors.PrimeiraCorEscura};
@@ -27,7 +27,6 @@ export const Div = styled.div`
 export const Title1 = styled.h1`
     font-size: 35px;
     color: ${colors.SegundaCorEscura};
-    margin-top: 10px;
 `;
 
 export const Categoria = styled.div`
@@ -117,13 +116,72 @@ export const LinkProduto = styled(Link)`
     padding: 10px 25px;
 `;
 
-export const ParagrafoSemProduto = styled.p`
-    font-size: 30px;
-    color: ${colors.CorError};
-    text-align: center;
+export const ContainerItens = styled.div`
+    width: 90%;
+    padding: 10px 0px;
+    border-top: 1px solid ${colors.CorCinza};
+    border-bottom: 1px solid ${colors.CorCinza};
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    form{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        
+        width: 100%;
+    }
+    
+    div.addItens{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    form div.addItens button{
+        height: 35px;
+        width: 50px;
+        font-size: 25px;
+        font-weight: normal;
+        color: ${colors.PrimeiraCorEscura};
+        border: none;
+
+        cursor: pointer;
+        margin: 0px 10px;
+    }
+    
+    form div.addItens button#subItens{
+        background-color: ${colors.CorCinzaClaro};
+    }
+    
+    form div.addItens button#addItens{
+        background-color: ${colors.PrimeiraCorClara};
+    }
+    
+    form input {
+        height: 60px;
+        width: 80px;
+
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: ${colors.PrimeiraCorEscura};
+
+        background-color: ${colors.CorBranca};
+        border: 1px solid ${colors.CorCinza};
+        border-radius: 10px;
+    }
+    
+    form div.btnAdd button#btnSalvarPedido{
+        font-size: 18px;
+        font-weight: normal;
+        color: ${colors.PrimeiraCorEscura};
+        background-color: ${colors.PrimeiraCorClara};
+        border: none;
+        border-radius: 10px;
+
+        padding: 10px 20px;
+        cursor: pointer;
+    }
 `;

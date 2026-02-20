@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import { get } from "lodash";
+import { FaRegFrown } from "react-icons/fa";
 
-import { Div, Title1, ContainerCard, Card} from "./styled"
+import { Div, Title1, ContainerCard, Card, ParagrafoSemProduto, LinkProduto} from "./styled"
 import * as TiposProdutos from "../../config/TiposProdutos"
 import axios from "../../config/axios"
 
@@ -12,7 +13,7 @@ function ProdutosAssados() {
     useEffect(() => {
         async function getProdutosAssados() {
             const { data } = await axios.get("/produto")
-            const produtosFilter = data.filter((produto, index) =>{
+            const produtosFilter = data.filter((produto, index) => {
                 return produto.categoria === TiposProdutos.Assados
             });
             setProdutos(produtosFilter)
@@ -29,16 +30,21 @@ function ProdutosAssados() {
                         <Card key={index}>
                             <div className="textoProduto">
                                 <h2>{produto.nome}</h2>
-                                <p>{produto.categoria}</p>
-                                <p>{produto.preco}</p>
-                                <Link to={`produto/${produto.id}`}>Selecionar</Link>
+                                <div>
+                                    <p>{produto.categoria}</p>
+                                    <p className="preco">R$ {produto.preco}</p>
+                                </div>
+                                <LinkProduto to={`${produto.id}`}>Selecionar</LinkProduto>
                             </div>
                             <div className="imagemProduto">
-                                <p>{get(produto, "produto.Fotos[0].url", "")}</p>
+                                <img src="../../../public/vite.svg" />
                             </div>
                         </Card>
-                    )) : 
-                    <p> Não tem produtos desse tipo na loja</p>}
+                    )) :
+                        <ParagrafoSemProduto>
+                            Não tem produtos desse tipo na loja
+                            <FaRegFrown />
+                        </ParagrafoSemProduto>}
                 </ContainerCard>
                 <footer>Area do footer</footer>
             </div>

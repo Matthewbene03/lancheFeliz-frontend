@@ -7,24 +7,24 @@ import { Div, Title1, ContainerCard, Card, ParagrafoSemProduto, LinkProduto} fro
 import * as TiposProdutos from "../../config/TiposProdutos"
 import axios from "../../config/axios"
 
-function ProdutosBebidas() {
-    const [produtos, setProdutos] = useState([]);
+function ProdutoSalgado() {
+    // const [produtos, setProdutos] = useState([]);
 
-    useEffect(() => {
-        async function getProdutosBebidas() {
-            const { data } = await axios.get("/produto")
-            const produtosFilter = data.filter((produto, index) => {
-                return produto.categoria === TiposProdutos.Bebidas
-            });
-            setProdutos(produtosFilter)
-        }
-        getProdutosBebidas();
-    }, []);
+    // useEffect(() => {
+    //     async function getProdutosSalgados() {
+    //         const { data } = await axios.get("/produto")
+    //         const produtosFilter = data.filter((produto, index) => {
+    //             return produto.categoria === TiposProdutos.Salgados
+    //         });
+    //         setProdutos(produtosFilter)
+    //     }
+    //     getProdutosSalgados();
+    // }, []);
 
     return (
         <Div>
-            <div className="container">
-                <Title1>Bebidas</Title1>
+            {/* <div className="container">
+                <Title1>Salgados</Title1>
                 <ContainerCard>
                     {produtos.length ? produtos.map((produto, index) => (
                         <Card key={index}>
@@ -34,7 +34,7 @@ function ProdutosBebidas() {
                                     <p>{produto.categoria}</p>
                                     <p className="preco">R$ {produto.preco}</p>
                                 </div>
-                                <LinkProduto to={`${produto.id}`}>Selecionar</LinkProduto>
+                                <LinkProduto to={`produto/${produto.id}`}>Selecionar</LinkProduto>
                             </div>
                             <div className="imagemProduto">
                                 <img src="../../../public/vite.svg" />
@@ -47,9 +47,10 @@ function ProdutosBebidas() {
                         </ParagrafoSemProduto>}
                 </ContainerCard>
                 <footer>Area do footer</footer>
-            </div>
+            </div> */}
+            <h1>Pagina de um Salgado</h1>
         </Div>
     )
 }
 
-export default ProdutosBebidas;
+export default ProdutoSalgado;

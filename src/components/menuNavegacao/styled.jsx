@@ -8,8 +8,9 @@ export const Container = styled.nav`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 50px;
-  border: 2px solid blue;
+  padding: 20px 100px;
+  background-color: ${colors.PrimeiraCorClara};
+  /* border: 2px solid blue; */
 
   /* position: fixed;
   top: 0;
