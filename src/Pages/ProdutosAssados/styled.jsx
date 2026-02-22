@@ -127,3 +127,72 @@ export const ParagrafoSemProduto = styled.p`
     align-items: center;
     gap: 10px;
 `;
+
+export const ContainerItens = styled.div`
+    width: 90%;
+    padding: 10px 0px;
+    border-top: 1px solid ${colors.CorCinza};
+
+    form{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        
+        width: 100%;
+    }
+    
+    div.addItens{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    form div.addItens button{
+        height: 35px;
+        width: 40px;
+        font-size: 25px;
+        font-weight: normal;
+        color: ${colors.PrimeiraCorEscura};
+        border: none;
+
+        cursor: pointer;
+        margin: 0px 10px;
+    }
+    
+    form div.addItens button#subItens{
+        background-color: ${colors.CorCinzaClaro};
+    }
+    
+    form div.addItens button#addItens{
+        background-color: ${colors.PrimeiraCorClara};
+    }
+    
+    form input {
+        height: 45px;
+        width: 60px;
+
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: ${colors.PrimeiraCorEscura};
+
+        background-color: ${colors.CorBranca};
+        border: 1px solid ${colors.CorCinza};
+        border-radius: 10px;
+    }
+    
+    form div.btnAdd button#btnSalvarPedido{
+        font-size: 15px;
+        font-weight: bold;
+        color: ${colors.PrimeiraCorEscura};
+        background-color: ${colors.PrimeiraCorClara};
+        border: none;
+        border-radius: 10px;
+
+        padding: 10px 25px;
+        cursor: pointer;
+    }
+`;

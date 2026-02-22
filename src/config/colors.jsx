@@ -10,3 +10,6 @@ export const CorCinzaClaro = "#eeeeee";
 export const CorCinzaEscuro = "#524f4f";
 export const CorVerde = "green";
 export const CorBranca = "white";
+export const CorAzul = "blue";
+export const CorAzulClara = "#7599ff";
+export const CorAzulEscuro = "#2a49a0";

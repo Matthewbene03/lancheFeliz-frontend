@@ -2,40 +2,63 @@ import styled from "styled-components";
 import * as colors from "../../config/colors"
 
 export const Container = styled.nav`
-  height: auto;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 100px;
-  border: 2px solid blue;
-
-  /* position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  background-color: white; */
-`;
-
-export const Title1 = styled.h1`
-    font-size: 35px;
-    color: ${colors.SegundaCorEscura};
-`;
-
-export const Categoria = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    color: ${colors.SegundaCorEscura};
+    justify-content: space-around;
+    
+    height: 12vh;
+    padding: 0px 30%;
+    background-color: ${colors.SegundaCorClara};
+    
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    
+    p{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80%;
+        width: 100px;
+
+        font-size: 18px;
+        font-weight: bold;
+        color: ${colors.CorCinzaEscuro};
+
+        border-radius: 15px;
+        background-color: ${({ pagAtiva }) => (pagAtiva ? "red" : colors.PrimeiraCorClara)};
+
+        transition: all 300ms;
+    }
+    
+    p:hover{
+        background-color: ${colors.PrimeiraCorClara};
+    }
 `;
 
-export const Usuario = styled.div`
-    height: 50px;
-    width: 50px;
-    background-color: #74e97461;
-    border: 2px solid green;
-    border-radius: 50%;
+export const Item = styled.div`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 80%;
+        width: 100px;
+
+        font-size: 20px;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+        color: ${colors.CorCinzaEscuro};
+
+        border-radius: 15px;
+        background-color: ${({ $pagAtiva }) => ($pagAtiva ? colors.PrimeiraCorClara: "none")};
+
+        cursor: pointer;
+        transition: all 300ms;
+    
+    &:hover{
+        background-color: ${colors.PrimeiraCorClara};
+    }
 `;
