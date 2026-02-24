@@ -2,8 +2,8 @@
 
 import { combineReducers } from "redux";
 
-import { reducerExample } from "./examples/reducer";
+import { reducerAuthrization } from "./authorization/reducer";
 
 export default combineReducers({
-    reducerExample,
+    authorization: reducerAuthrization,
 })

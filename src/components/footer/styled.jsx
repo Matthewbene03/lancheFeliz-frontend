@@ -50,7 +50,7 @@ export const Item = styled.div`
         font-size: 20px;
         font-weight: bold;
         font-family: "Roboto", sans-serif;
-        color: ${colors.CorCinzaEscuro};
+        color: ${colors.CorCinzaClaro};
 
         border-radius: 15px;
         background-color: ${({ $pagAtiva }) => ($pagAtiva ? colors.PrimeiraCorClara: "none")};

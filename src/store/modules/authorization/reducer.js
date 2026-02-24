@@ -1,10 +1,44 @@
+import * as types from "../types"
+
 const initialState = {
-    exemplo: "valor inicial"
+    isLoggedIn: false,
+    token: false,
+    user: {},
+    isLoading: false,
 };
 
-export const reducerExample = (state = initialState, action) => {
-    console.log(state);
-    console.log(action);
+export const reducerAuthrization = (state = initialState, action) => {
+    switch (action.type) {
+        case types.LOGIN_SUCCESS: {
+            const newState = {...state};
+            newState.isLoggedIn = true; //Está logado
+            newState.token = action.payload.token;
+            newState.user = action.payload.user;
+            return newState
+        }
+        case types.LOGIN_REQUEST: {
+            const newState = {...initialState};
+            return newState;
+        }
+        case types.LOGIN_FAILURE: {
+            const newState = {...initialState};
+            return newState;        
+        }
+        case types.REGISTER_SUCCESS: { //Fez o cadastro com sucesso
+            const newState = {...state};
+            return newState
+        }
+        case types.REGISTER_REQUEST: {
+            const newState = {...initialState};
+            return newState;
+        }
+        case types.REGISTER_FAILURE: {
+            const newState = {...initialState};
+            return newState;        
+        }
 
-    return state
+        default: {
+            return state
+        }
+    }
 }

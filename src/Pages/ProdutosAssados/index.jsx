@@ -8,7 +8,7 @@ import * as TiposProdutos from "../../config/TiposProdutos"
 import axios from "../../config/axios"
 
 function ProdutosAssados() {
-    const usuario = ""; //Recebe um sinal, tiver usuário logado;
+    const isLoggedIn = ""; //Recebe um sinal, tiver usuário logado;
     const [produtos, setProdutos] = useState([]);
     const [dadosCompraProduto, setDadosCompraProduto] = useState([{}])
     // const [valorCompra, setValorCompra] = useState(0);
@@ -52,6 +52,8 @@ function ProdutosAssados() {
 
     const handleSalvarPedidos = (e) =>{
         e.preventDefault();
+
+
         console.log("handleSalvarPedidos")
     }
 
