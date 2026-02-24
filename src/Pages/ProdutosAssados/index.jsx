@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate, useLocation} from "react-router-dom";
 import { get } from "lodash";
 import { FaRegFrown } from "react-icons/fa";
 
 import { Div, Title1, ContainerCard, Card, ParagrafoSemProduto, ContainerItens } from "./styled"
 import * as TiposProdutos from "../../config/TiposProdutos"
 import axios from "../../config/axios"
+import { toast } from "react-toastify";
 
 function ProdutosAssados() {
-    const isLoggedIn = ""; //Recebe um sinal, tiver usuário logado;
     const [produtos, setProdutos] = useState([]);
     const [dadosCompraProduto, setDadosCompraProduto] = useState([{}])
     // const [valorCompra, setValorCompra] = useState(0);
     // const [qtdItens, setQtdItens] = useState();
     // const { id } = useParams();
+    
+    const isLoggedIn = useSelector(state => state.authorization.isLoggedIn); //Recebe um sinal, tiver usuário logado;
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         async function getProdutosAssados() {
@@ -53,6 +58,12 @@ function ProdutosAssados() {
     const handleSalvarPedidos = (e) =>{
         e.preventDefault();
 
+        if(!isLoggedIn){
+            toast.warning("Você precisa fazer login!");
+            navigate("/login", {
+                state: {from: location.pathname} //Passa para o login a rota atual 
+            });
+        }
 
         console.log("handleSalvarPedidos")
     }

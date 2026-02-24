@@ -7,7 +7,7 @@ export const Div = styled.div`
     justify-content: center;
     margin: 50px 0px;
     
-    div.containerBemVindo{
+    div.container{
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
