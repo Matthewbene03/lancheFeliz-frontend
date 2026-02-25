@@ -12,6 +12,7 @@ import PaginaSalgados from "../Pages/ProdutosSalgados/index"
 import Perfil from "../Pages/Perfil/index";
 import Login from "../Pages/Login/index";
 import Register from "../Pages/Register/index";
+import Edit from "../Pages/Edit/index";
 import Error404 from "../Pages/Error404/index"
 
 import PrivateRoute from "./PrivateRoutes";
@@ -31,6 +32,7 @@ function AppRoutes() {
             <Route exact path="/perfil" element={<Perfil/>} />
             <Route exact path="/login" element={<Login/>} />
             <Route exact path="/register" element={<Register/>} />
+            <Route exact path="/edit" element={<Edit/>} />
             <Route path="*" element={<Error404 />} />
         </Routes>
     );

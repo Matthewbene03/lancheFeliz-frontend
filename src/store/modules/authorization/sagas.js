@@ -15,6 +15,7 @@ function* loginRequest({ payload }) {
 
         axios.defaults.headers.Authorization = `Bearer ${data.token}`
     } catch (e) {
+        console.log(e)
         toast.error("Usuário ou senha inválidos.");
         yield put(actions.loginFailure());
     }
@@ -48,8 +49,34 @@ function* registerRequest({ payload}) {
     }
 }
 
+function* updateRequest({ payload}) {
+
+    let {id, nome, email, senha, trocouEmail} = payload;
+    senha = senha ? senha:undefined
+
+    try {
+        const responseData = yield call(axios.put, "/usuario", {id, nome, email, senha})
+        yield put(actions.updateSuccess({ ...responseData.data }));
+
+        if(trocouEmail){
+            toast.success("Edição realizada com sucesso!");
+            toast.success("Faça login, você trocou o seu email!");
+            yield put(actions.loginFailure());
+        } else{
+            toast.success("Edição realizada com sucesso!");
+        }
+
+        // // axios.defaults.headers.Authorization = `Bearer ${data.token}`
+    } catch (e) {
+        console.log(e)
+        console.log(e.response?.data);
+        toast.error("Usuário ou senha inválidos.");
+    }
+}
+
 export default all([
     takeLatest(types.LOGIN_REQUEST, loginRequest),
     takeLatest(types.PERSIST_REHYDRATE, persistREHYDRATE),
-    takeLatest(types.REGISTER_REQUEST, registerRequest)
+    takeLatest(types.REGISTER_REQUEST, registerRequest),
+    takeLatest(types.UPDATE_REQUEST, updateRequest)
 ])
