@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import * as colors from "../../config/colors"
+import { Link } from "react-router-dom";
 
 export const Container = styled.nav`
     display: flex;
@@ -39,7 +40,7 @@ export const Container = styled.nav`
     }
 `;
 
-export const Item = styled.div`
+export const LinkItem = styled(Link)`
         display: flex;
         flex-direction: column;
         align-items: center;
