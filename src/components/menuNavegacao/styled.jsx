@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import * as colors from "../../config/colors"
 
 export const Container = styled.nav`
@@ -10,18 +11,11 @@ export const Container = styled.nav`
   justify-content: space-between;
   padding: 20px 100px;
   background-color: ${colors.PrimeiraCorClara};
-  /* border: 2px solid blue; */
-
-  /* position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  background-color: white; */
 `;
 
 export const Title1 = styled.h1`
     font-size: 35px;
-    color: ${colors.SegundaCorEscura};
+    color: ${colors.CorCinzaEscuro};
 `;
 
 export const Categoria = styled.div`
@@ -30,13 +24,29 @@ export const Categoria = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    color: ${colors.SegundaCorEscura};
 `;
 
-export const Usuario = styled.div`
+export const LinkCategoria = styled(Link)`
+    color: ${colors.CorCinzaEscuro};
+    padding: 5px 10px;
+    
+    &:hover{
+        border-bottom: 1.5px solid ${colors.CorCinzaEscuro};
+    }
+`;
+
+export const Carrinho = styled.div`
     height: 50px;
     width: 50px;
-    background-color: #74e97461;
-    border: 2px solid green;
     border-radius: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${colors.CorCinzaEscuro};
+    
+    .carrinho{
+        height: 70%;
+        width: 70%;
+    }
 `;
