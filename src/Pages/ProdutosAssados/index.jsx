@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { get } from "lodash";
 import { FaRegFrown } from "react-icons/fa";
 
 import { Div, Title1, ContainerCard, Card, ParagrafoSemProduto, ContainerItens } from "./styled"
 import * as TiposProdutos from "../../config/TiposProdutos"
+import * as actions from "../../store/modules/carrinhoCompras/actions"
 import axios from "../../config/axios"
 import { toast } from "react-toastify";
 
@@ -19,6 +20,7 @@ function ProdutosAssados() {
     const isLoggedIn = useSelector(state => state.authorization.isLoggedIn); //Recebe um sinal, tiver usuário logado;
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
     useEffect(() => {        
         async function getProdutosAssados() {
@@ -27,7 +29,7 @@ function ProdutosAssados() {
                 return produto.categoria === TiposProdutos.Assados
             });
             const dadosCompra = produtosFilter.map((produto) => {
-                return { qtdItens: 1, valorCompra: produto.preco }
+                return { idProduto: produto.id, qtdItens: 1, valorCompra: produto.preco }
             })
 
             setProdutos(produtosFilter)
@@ -55,7 +57,7 @@ function ProdutosAssados() {
         setDadosCompraProduto(novosDados);
     }
 
-    const handleSalvarPedidos = (e) => {
+    const handleSalvarPedidos = (e, index) => {
         e.preventDefault();
 
         if (!isLoggedIn) {
@@ -65,7 +67,12 @@ function ProdutosAssados() {
             });
         }
 
-        console.log("handleSalvarPedidos")
+        const pedidoCarrinho = {
+            produto: produtos[index],
+            dadosCompraProduto: dadosCompraProduto[index]
+        }
+
+        dispatch(actions.addCarrinhoRequest(pedidoCarrinho))
     }
 
     return (
@@ -89,7 +96,7 @@ function ProdutosAssados() {
                                             <button type="button" id="addItens" onClick={e => handleAddItens(e, index)}>+</button>
                                         </div>
                                         <div className="btnAdd">
-                                            <button id="btnSalvarPedido" type="submit" onClick={handleSalvarPedidos}>Salvar Pedido R$ {dadosCompraProduto[index].valorCompra}</button>
+                                            <button id="btnSalvarPedido" type="submit" onClick={e => handleSalvarPedidos(e, index)}>Salvar Pedido R$ {dadosCompraProduto[index].valorCompra}</button>
                                         </div>
                                     </form>
                                 </ContainerItens>

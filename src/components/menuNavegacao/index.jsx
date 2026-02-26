@@ -13,7 +13,7 @@ function NavMenu() {
                 <LinkCategoria to={"/pizzas"}> Pizzas </LinkCategoria>
                 <LinkCategoria to={"/saldados"}> Salgados </LinkCategoria>
             </Categoria>
-            <Link to={"/usuario"}>
+            <Link to={"/carrinho-itens"}>
                 <Carrinho>
                     <FaShoppingCart className="carrinho" />
                 </Carrinho>

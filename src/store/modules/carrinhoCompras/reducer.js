@@ -1,10 +1,43 @@
+import * as types from "../types"
+
 const initialState = {
-    exemplo: "valor inicial"
+    produto: [],
+    dadosCompraProduto: []
 };
 
-export const reducerExample = (state = initialState, action) => {
-    console.log(state);
-    console.log(action);
+export const reducerCarrinhoCompras = (state = initialState, action) => {
+    switch (action.type) {
+        case types.ADD_CARRINHO_SUCCESS: {
+            const newState = { ...state };
+            newState.produto.push(action.payload.produto);
+            newState.dadosCompraProduto.push(action.payload.dadosCompraProduto);
+            return newState
+        }
+        case types.ADD_CARRINHO_REQUEST: {
+            const newState = { ...state };
+            return newState
+        }
+        case types.ADD_CARRINHO_FAILURE: {
+            const newState = { ...initialState };
+            return newState;
+        }
+        case types.REMOVE_PRODUTO_SUCCESS: {
+            const newState = { ...state };
+            newState.produto = action.payload.produto;
+            newState.dadosCompraProduto = action.payload.dadosCompraProduto;
+            return newState
+        }
+        case types.REMOVE_PRODUTO_REQUEST: {
+            const newState = { ...state };
+            return newState
+        }
+        case types.REMOVE_PRODUTO_FAILURE: {
+            const newState = { ...initialState };
+            return newState;
+        }
 
-    return state
+        default: {
+            return state
+        }
+    }
 }

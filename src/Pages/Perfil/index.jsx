@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 import { Div, Cabecalho, LinkLogin, AcoesUsuario, CabecalhoSemLogin} from "./styled"
 import * as actions from "../../store/modules/authorization/actions"
+import * as actionsCarrinho from "../../store/modules/carrinhoCompras/actions"
 
 function Perfil() {
 
@@ -28,6 +29,7 @@ function Perfil() {
         e.preventDefault();
 
         dispatch(actions.loginFailure())
+        dispatch(actionsCarrinho.addCarrinhoFailure())
         toast.success("Você saiu da sua conta!")
     }
 

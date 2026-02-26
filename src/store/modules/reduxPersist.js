@@ -6,7 +6,7 @@ export default reducers =>{
         {
             key: "LancheFeliz",
             storage, 
-            whiteList: ["authorization"]
+            whiteList: ["authorization", "carrinhoCompras"]
         }
     , reducers)
 

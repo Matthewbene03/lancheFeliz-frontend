@@ -3,6 +3,7 @@ import { toast } from "react-toastify"
 import { get } from "lodash"
 
 import * as actions from "./actions"
+import * as actionsCarrinho from "../carrinhoCompras/actions"
 import * as types from "../types"
 import axios from "../../../config/axios"
 
@@ -18,6 +19,7 @@ function* loginRequest({ payload }) {
         console.log(e)
         toast.error("Usuário ou senha inválidos.");
         yield put(actions.loginFailure());
+        yield put(actionsCarrinho.addCarrinhoFailure());
     }
 }
 
