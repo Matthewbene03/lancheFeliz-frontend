@@ -14,12 +14,13 @@ export const Div = styled.div`
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
-        justify-content: ${({ $isLoggedIn }) => ($isLoggedIn ? "left": "center")};
+        justify-content: ${({ $isLoggedIn }) => ($isLoggedIn ? "left" : "center")};
         
         gap: 50px;
         height: 60vh;
         width: 50vw;
         box-shadow: 0px 0px 40px ${colors.PrimeiraCorEscura};
+        /* border: 2px solid red; */
     }
 `;
 
@@ -28,48 +29,109 @@ export const AcoesUsuario = styled.div`
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
-
-    height: auto;
+    
+    height: 100%;
     width: 100%;
+    overflow: auto;
     /* border: 2px solid red; */
-
+    
     h2{
         font-size: 30px;
         color: ${colors.SegundaCorClara};
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
+    `;
+
+export const ContainerPedidos = styled.div`
+    width: 90%;
+    overflow: auto;
+
+    /* border: 2px solid blue; */
+`;
+
+export const Card = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
     
-    div.editarDados, div.sairConta{
+    height: auto;
+    width: 100%;
+    /* border: 2px solid red; */
+    
+    div.textoProduto{
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
+        flex-direction: column;
+        /* align-items: flex-start; */
         justify-content: space-between;
-        gap: 15px;
         
-        font-size: 30px;
-        font-family: "Roboto", sans-serif;
-        color: ${colors.CorCinza};
-        text-align: center;
-        
-        height: auto;
-        width: 90%;
-        padding: 25px 0px;
-        padding-left: 15px;
-        border-top: 2px solid ${colors.CorCinza};
-        cursor: pointer;
+        gap: 0px;
+        height: 100%;
+        width: 100%;
+        padding: 5px 0px;
+        border-top: 2px solid ${colors.PrimeiraCorClara};
+        border-bottom: 2px solid ${colors.PrimeiraCorClara};
     }
     
-    div.editarDados div, div.sairConta div{
+    div.textoProduto div{
+        height: 100%;
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
+        flex-direction: column;
+        /* align-items: flex-start; */
         justify-content: center;
-        gap: 20px;
+;
     }
 
+    div.textoProduto h2{
+        /* display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden; */
+
+        font-size: 30px;
+        color: ${colors.PrimeiraCorEscura};
+        text-align: left;
+        font-weight: 500;
+        width: 100%;
+    }
+
+    div.textoProduto div p{
+        font-size: 18px;
+        text-align: left;
+        font-weight: 500;
+        color: ${colors.SegundaCorEscura};
+        margin-bottom: 5px;
+    }
+    
+    div.textoProduto div p span{
+        font-size: 18px;
+        color: ${colors.CorCinzaEscuro};
+    }
+    
+    div.textoProduto div p.preco{
+        font-size: 20px;
+        font-weight: 500;
+        color: ${colors.CorVerde};
+        text-align: right;
+
+        width: 100%;
+        padding: 10px 15px;
+        background-color: ${colors.CorCinza};
+        margin-bottom: 0px;
+        border-radius: 5px;
+    }
+`;
+
+export const ParagrafoSemProduto = styled.p`
+    font-size: 30px;
+    color: ${colors.CorError};
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 `;
 
 export const CabecalhoSemLogin = styled.div`

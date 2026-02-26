@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux";
-import { Link, useNavigate, useLocation} from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { get } from "lodash";
 import { FaRegFrown } from "react-icons/fa";
 
@@ -15,12 +15,12 @@ function ProdutosAssados() {
     // const [valorCompra, setValorCompra] = useState(0);
     // const [qtdItens, setQtdItens] = useState();
     // const { id } = useParams();
-    
+
     const isLoggedIn = useSelector(state => state.authorization.isLoggedIn); //Recebe um sinal, tiver usuário logado;
     const navigate = useNavigate();
     const location = useLocation();
 
-    useEffect(() => {
+    useEffect(() => {        
         async function getProdutosAssados() {
             const { data } = await axios.get("/produto")
             const produtosFilter = data.filter((produto) => {
@@ -55,13 +55,13 @@ function ProdutosAssados() {
         setDadosCompraProduto(novosDados);
     }
 
-    const handleSalvarPedidos = (e) =>{
+    const handleSalvarPedidos = (e) => {
         e.preventDefault();
 
-        if(!isLoggedIn){
+        if (!isLoggedIn) {
             toast.warning("Você precisa fazer login!");
             navigate("/login", {
-                state: {from: location.pathname} //Passa para o login a rota atual 
+                state: { from: location.pathname } //Passa para o login a rota atual 
             });
         }
 

@@ -9,6 +9,8 @@ import PaginaPizza from "../Pages/ProdutoPizza/index"
 import PaginaPizzas from "../Pages/ProdutosPizzas/index"
 import PaginaSalgado from "../Pages/ProdutoSalgado/index"
 import PaginaSalgados from "../Pages/ProdutosSalgados/index"
+import Pedidos from "../Pages/Pedidos/index"
+import PedidosFeitos from "../Pages/PedidosFeitos/index"
 import Perfil from "../Pages/Perfil/index";
 import Login from "../Pages/Login/index";
 import Register from "../Pages/Register/index";
@@ -29,6 +31,8 @@ function AppRoutes() {
             <Route exact path="/pizzas/:id" element={<PaginaPizza />} />
             <Route exact path="/saldados" element={<PaginaSalgados />} />
             <Route exact path="/saldados/:id" element={<PaginaSalgado />} />
+            <Route exact path="/pedidos" element={<Pedidos />} />
+            <Route exact path="/pedidos/pedidos-feitos" element={<PedidosFeitos />} />
             <Route exact path="/perfil" element={<Perfil/>} />
             <Route exact path="/login" element={<Login/>} />
             <Route exact path="/register" element={<Register/>} />
