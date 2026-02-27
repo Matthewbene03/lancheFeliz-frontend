@@ -73,6 +73,7 @@ function ProdutosAssados() {
         }
 
         dispatch(actions.addCarrinhoRequest(pedidoCarrinho))
+        toast.success("Pedido adicionado ao seu carrinho")
     }
 
     return (
