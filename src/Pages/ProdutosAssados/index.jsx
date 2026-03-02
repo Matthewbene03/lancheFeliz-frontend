@@ -65,6 +65,7 @@ function ProdutosAssados() {
             navigate("/login", {
                 state: { from: location.pathname } //Passa para o login a rota atual 
             });
+            return;
         }
 
         const pedidoCarrinho = {
