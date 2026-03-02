@@ -7,8 +7,7 @@ import * as TiposUsuarios from "../../config/TiposUsuarios"
 
 function NavMenu() {
     const { user } = useSelector(state => state.authorization)
-    console.log(user)
-
+    
     return (
         <Container>
             {(user.tipo === TiposUsuarios.Caixa || user.tipo === TiposUsuarios.Cozinha || user.tipo === TiposUsuarios.Gerente) ? (

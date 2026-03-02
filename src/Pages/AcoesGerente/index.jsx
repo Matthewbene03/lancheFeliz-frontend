@@ -2,9 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { SlReload } from "react-icons/sl";
 import { FaRegSadCry } from "react-icons/fa";
 import { IoIosArrowForward, IoIosLogOut } from "react-icons/io";
-import { VscAccount } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { FaUserPlus, FaUserEdit} from "react-icons/fa";
+import { MdAddShoppingCart, MdModeEdit } from "react-icons/md";
+import { PiUserListThin } from "react-icons/pi";
 
 import { Div, Cabecalho, LinkLogin, AcoesUsuario, CabecalhoSemLogin } from "./styled"
 import * as StatusPedidos from "../../config/StatusPedidos"
@@ -17,7 +18,27 @@ function AcoesGerente() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleClickEmAndamento = (e) => {
+    const handleCadastroFuncionario = (e) => {
+        e.preventDefault();
+        navigate("/acoes/cadastro-funcionario", {
+            state: {
+                from: location.pathname,
+                statusPedido: StatusPedidos.EmAndamento
+            }
+        });
+    }
+
+    const handleEditFuncionario = (e) => {
+        e.preventDefault();
+        navigate("/pedidos/pedidos-feitos", {
+            state: { 
+                from: location.pathname,
+                statusPedido: StatusPedidos.Finalizado
+            }
+        });
+    }
+ 
+    const handleCadastroProduto = (e) => {
         e.preventDefault();
         navigate("/pedidos/pedidos-feitos", {
             state: {
@@ -27,7 +48,7 @@ function AcoesGerente() {
         });
     }
 
-    const handleClickFinalizado = (e) => {
+    const handleEditProduto = (e) => {
         e.preventDefault();
         navigate("/pedidos/pedidos-feitos", {
             state: { 
@@ -36,6 +57,17 @@ function AcoesGerente() {
             }
         });
     }
+
+    const handleListarUsuario = (e) => {
+        e.preventDefault();
+        navigate("/pedidos/pedidos-feitos", {
+            state: { 
+                from: location.pathname,
+                statusPedido: StatusPedidos.Finalizado
+            }
+        });
+    }
+
     return (
         <Div $isLoggedIn={isLoggedIn}>
             {isLoggedIn ? (
@@ -52,18 +84,42 @@ function AcoesGerente() {
                     </Cabecalho>
 
                     <AcoesUsuario className="acoesUsuario">
-                        <h2>Deseja visualizar os seus pedidos?</h2>
-                        <div className="editarDados" onClick={handleClickEmAndamento}>
+                        <h2>Deseja realizar o que?</h2>
+                        <div className="editarDados" onClick={handleCadastroFuncionario}>
                             <div>
-                                <SlReload /> Em andamento
+                                <FaUserPlus /> Cadastro de Funcionário
                             </div>
                             <div>
                                 <IoIosArrowForward />
                             </div>
                         </div>
-                        <div className="sairConta" onClick={handleClickFinalizado}>
+                        <div className="editarDados" onClick={handleEditFuncionario}>
                             <div>
-                                <IoIosLogOut /> Finalizado
+                                <FaUserEdit /> Edição de Funcionário
+                            </div>
+                            <div>
+                                <IoIosArrowForward />
+                            </div>
+                        </div>
+                        <div className="sairConta" onClick={handleCadastroProduto}>
+                            <div>
+                                <MdAddShoppingCart /> Cadastro de Produto
+                            </div>
+                            <div>
+                                <IoIosArrowForward />
+                            </div>
+                        </div>
+                        <div className="sairConta" onClick={handleEditFuncionario}>
+                            <div>
+                                <MdModeEdit /> Edição de Produto
+                            </div>
+                            <div>
+                                <IoIosArrowForward />
+                            </div>
+                        </div>
+                        <div className="sairConta" onClick={handleListarUsuario}>
+                            <div>
+                                <PiUserListThin /> Listagem de usuários
                             </div>
                             <div>
                                 <IoIosArrowForward />

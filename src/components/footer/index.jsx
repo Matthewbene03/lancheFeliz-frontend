@@ -12,7 +12,6 @@ import * as TiposUsuarios from "../../config/TiposUsuarios"
 function Footer() {
   const location = useLocation();
   const { user } = useSelector(state => state.authorization)
-  console.log(user)
 
   return (
     <Container>

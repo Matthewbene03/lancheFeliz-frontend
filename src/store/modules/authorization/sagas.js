@@ -29,18 +29,18 @@ function persistREHYDRATE({ payload }) {
     axios.defaults.headers.Authorization = `Bearer ${token}`
 }
 
-function* registerRequest({ payload}) {
+function* registerRequest({ payload }) {
     try {
         const responseData = yield call(axios.post, "/usuario/cliente", payload)
         console.log("--- Dados do cadastro ---")
         console.log(payload)
         console.log(responseData.data)
         yield put(actions.registerSuccess({ ...responseData.data }));
-        
+
         const { data } = yield call(axios.post, "/token", { email: payload.email, senha: payload.senha }) //Faz o login apos fazer o cadastro
         console.log("--- Dados do login ---")
         console.log(data)
-        yield put(actions.loginSuccess({...data}));
+        yield put(actions.loginSuccess({ ...data }));
 
         toast.success("Cadastro realizado com sucesso!");
 
@@ -51,20 +51,20 @@ function* registerRequest({ payload}) {
     }
 }
 
-function* updateRequest({ payload}) {
+function* updateRequest({ payload }) {
 
-    let {id, nome, email, senha, trocouEmail} = payload;
-    senha = senha ? senha:undefined
+    let { id, nome, email, senha, trocouEmail } = payload;
+    senha = senha ? senha : undefined
 
     try {
-        const responseData = yield call(axios.put, "/usuario", {id, nome, email, senha})
+        const responseData = yield call(axios.put, "/usuario", { id, nome, email, senha })
         yield put(actions.updateSuccess({ ...responseData.data }));
 
-        if(trocouEmail){
+        if (trocouEmail) {
             toast.success("Edição realizada com sucesso!");
             toast.success("Faça login, você trocou o seu email!");
             yield put(actions.loginFailure());
-        } else{
+        } else {
             toast.success("Edição realizada com sucesso!");
         }
 
@@ -80,5 +80,5 @@ export default all([
     takeLatest(types.LOGIN_REQUEST, loginRequest),
     takeLatest(types.PERSIST_REHYDRATE, persistREHYDRATE),
     takeLatest(types.REGISTER_REQUEST, registerRequest),
-    takeLatest(types.UPDATE_REQUEST, updateRequest)
+    takeLatest(types.UPDATE_REQUEST, updateRequest),
 ])

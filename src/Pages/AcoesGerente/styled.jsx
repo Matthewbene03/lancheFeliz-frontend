@@ -31,6 +31,8 @@ export const AcoesUsuario = styled.div`
 
     height: auto;
     width: 100%;
+    padding-bottom: 30px;
+    overflow: auto;
     /* border: 2px solid red; */
 
     h2{
