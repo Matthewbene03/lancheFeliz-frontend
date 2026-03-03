@@ -16,6 +16,7 @@ import CarrinhoItens from "../Pages/CarrinhoItens/index";
 import Perfil from "../Pages/Perfil/index";
 import Login from "../Pages/Login/index";
 import CadastroFuncionario from "../Pages/CadastroFuncionario/index";
+import CadastroProduto from "../Pages/CadastroProduto/index";
 import Register from "../Pages/Register/index";
 import Edit from "../Pages/Edit/index";
 import Error404 from "../Pages/Error404/index"
@@ -43,6 +44,7 @@ function AppRoutes() {
             <Route exact path="/register" element={<Register/>} />
             <Route exact path="/edit" element={<Edit/>} />
             <Route exact path="/acoes/cadastro-funcionario" element={<CadastroFuncionario/>} />
+            <Route exact path="/acoes/cadastro-produto" element={<CadastroProduto/>} />
             <Route path="*" element={<Error404 />} />
         </Routes>
     );

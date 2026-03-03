@@ -54,8 +54,12 @@ function CadastroFuncionario() {
         if (formErros) return;
 
         try {
-            await axios.post("/usuario/funcionario", {nome, email, senha, tipo: tipoFuncionario})
+            await axios.post("/usuario/funcionario", { nome, email, senha, tipo: tipoFuncionario })
             toast.success("Cadastro realizado com sucesso!");
+            setNome("");
+            setEmail("");
+            setSenha("");
+            setTipoFuncionario("");
         } catch (e) {
             toast.error("Usuário ou senha inválidos.");
         }

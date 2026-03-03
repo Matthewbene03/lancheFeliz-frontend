@@ -40,7 +40,7 @@ function AcoesGerente() {
  
     const handleCadastroProduto = (e) => {
         e.preventDefault();
-        navigate("/pedidos/pedidos-feitos", {
+        navigate("/acoes/cadastro-produto", {
             state: {
                 from: location.pathname,
                 statusPedido: StatusPedidos.EmAndamento
