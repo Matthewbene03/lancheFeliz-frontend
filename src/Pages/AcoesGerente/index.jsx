@@ -23,17 +23,15 @@ function AcoesGerente() {
         navigate("/acoes/cadastro-funcionario", {
             state: {
                 from: location.pathname,
-                statusPedido: StatusPedidos.EmAndamento
             }
         });
     }
 
     const handleEditFuncionario = (e) => {
         e.preventDefault();
-        navigate("/pedidos/pedidos-feitos", {
-            state: { 
+        navigate("/acoes/edit-funcionario", {
+            state: {
                 from: location.pathname,
-                statusPedido: StatusPedidos.Finalizado
             }
         });
     }
@@ -43,7 +41,6 @@ function AcoesGerente() {
         navigate("/acoes/cadastro-produto", {
             state: {
                 from: location.pathname,
-                statusPedido: StatusPedidos.EmAndamento
             }
         });
     }
@@ -53,17 +50,15 @@ function AcoesGerente() {
         navigate("/pedidos/pedidos-feitos", {
             state: { 
                 from: location.pathname,
-                statusPedido: StatusPedidos.Finalizado
             }
         });
     }
 
     const handleListarUsuario = (e) => {
         e.preventDefault();
-        navigate("/pedidos/pedidos-feitos", {
+        navigate("/acoes/lista-usuarios", {
             state: { 
                 from: location.pathname,
-                statusPedido: StatusPedidos.Finalizado
             }
         });
     }
