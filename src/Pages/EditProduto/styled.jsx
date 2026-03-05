@@ -41,6 +41,9 @@ export const Title1 = styled.h1`
 export const Form = styled.form`
     flex: 70%;
     width: 80%;
+    padding-bottom: 50px;
+    padding-right: 15px;
+    overflow:auto;
     /* border: 2px solid red; */
 
     label{
@@ -57,7 +60,7 @@ export const Form = styled.form`
         color: ${colors.SegundaCorEscura};
     }
 
-    input{
+    input, select{
         height: 50px;
         border: 1.5px solid ${colors.CorCinza};
         border-radius: 8px;

@@ -1,28 +1,33 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector} from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import {isEmail} from "validator"
+import { isNumeric } from "validator"
 
 import { Div, Form, Title1 } from "./styled"
+import * as TiposProdutos from "../../config/TiposProdutos"
 import * as actions from "../../store/modules/authorization/actions"
 import axios from "../../config/axios"
-import { get } from "lodash";
 
-function Edit() {
-    const {user} = useSelector(state => state.authorization)
-    const [nome, setNome] = useState(user.nome);
-    const [email, setEmail] = useState(user.email);
-    const [senha, setSenha] = useState("");
-    let trocouEmail = false;
+function EditProduto() {
+    const location = useLocation();
+    const produto = location.state?.produto
+    const tempoMinutos = converterMiliSegundosMinutos(produto.tempoPreparo);
 
-    const dispatch = useDispatch();
+    const [nome, setNome] = useState(produto.nome);
+    const [preco, setPreco] = useState(String(produto.preco));
+    const [tempoPreparo, setTempoPreparo] = useState(String(tempoMinutos));
+    const [tipoProduto, setTipoProduto] = useState(produto.categoria);
+
+    const tempo = converterMiliSegundosMinutos(produto.tempoPreparo);
+
     const navigate = useNavigate();
-    const isLoggedIn = useSelector(state => state.authorization.isLoggedIn)
+    const from = location.state?.from || "/"
+    const isLoggedIn = useSelector(state => state.authorization.isLoggedIn);
 
     useEffect(() => {
         function mudarRota() {
-            if(!isLoggedIn){
+            if (!isLoggedIn) {
                 navigate("/login")
             }
         }
@@ -38,43 +43,85 @@ function Edit() {
             formErros = true;
             toast.error("Nome tem que ter entre 3 e 250 caracteres")
         }
-        if (!isEmail(email)) {
+        if (!isNumeric(preco)) {
             formErros = true;
-            toast.error("Email inválido!")
+            toast.error("Valor tem que ser número!")
+        }
+        if (!isNumeric(tempoPreparo)) {
+            formErros = true;
+            toast.error("Tempo de preparo tem que ser número!")
+        }
+        if (!tipoProduto) {
+            formErros = true;
+            toast.error("Selecione o tipo desse produto")
         }
 
-        if(formErros) return;
-        
-        const {id} = user;
+        if (formErros) return;
 
-        if(email !== user.email){
-            trocouEmail = true;
+        const novoTempoPreparo = converterMinutosMiliSegundos();
+        const novoProduto = {
+            nome,
+            preco,
+            categoria: tipoProduto,
+            ativo: true,
+            tempoPreparo: novoTempoPreparo
         }
-        dispatch(actions.updateRequest({id, nome, email, senha, trocouEmail}));
+
+        // console.log(produto.id)
+
+        try {
+            const { data } = await axios.put(`produto/${produto.id}`, novoProduto)
+            console.log(data)
+            toast.success("Edição realizada")
+            navigate(from, { replace: true })
+        } catch (e) {
+            toast.error("Error")
+            console.log(e);
+        }
+    }
+
+    const converterMinutosMiliSegundos = () => {
+        const novoTempoSegundos = 60 * 1000 * tempoPreparo;
+        return novoTempoSegundos
+    }
+
+    function converterMiliSegundosMinutos (tempo) {
+        const novoTempoSegundos = (tempo) / (60 * 1000);
+        return novoTempoSegundos
     }
 
     return (
         <Div>
             <div className="container">
-                <Title1>Edita o seus dados</Title1>
+                <Title1>Edita os dados do produto</Title1>
                 <Form onSubmit={handleSubmit}>
                     <label>
-                        Nome completo:
-                        <input type="text" value={nome} onChange={e => setNome(e.target.value)} placeholder="Digite seu nome completo" />
+                        Nome:
+                        <input type="text" value={nome} onChange={e => setNome(e.target.value)} placeholder="Digite o nome do produto" />
                     </label>
                     <label>
-                        Seu melhor email:
-                        <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Digite seu email" />
+                        Valor(R$):
+                        <input type="text" value={preco} onChange={e => setPreco(e.target.value)} placeholder="Digite seu email" />
                     </label>
                     <label>
-                        Sua senha:
-                        <input type="password" value={senha} onChange={e => setSenha(e.target.value)} placeholder="Digite sua senha para login" />
+                        Tempo para preparo (Em minutos):
+                        <input type="text" value={tempoPreparo} onChange={e => setTempoPreparo(e.target.value)} placeholder="Digite sua senha para login" />
                     </label>
-                    <button type="submit">Editar conta</button>
+                    <label>
+                        Informe a categoria do produto:
+                        <select value={tipoProduto} onChange={e => setTipoProduto(e.target.value)}>
+                            <option value="" disabled>Selecione o tipo</option>
+                            <option value={TiposProdutos.Assados}>Assado</option>
+                            <option value={TiposProdutos.Bebidas}>Bebida</option>
+                            <option value={TiposProdutos.Pizzas}>Pizza</option>
+                            <option value={TiposProdutos.Salgados}>Salgado</option>
+                        </select>
+                    </label>
+                    <button type="submit">Editar produto</button>
                 </Form>
             </div>
         </Div>
     )
 }
 
-export default Edit;
+export default EditProduto;

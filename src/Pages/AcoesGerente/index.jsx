@@ -47,7 +47,7 @@ function AcoesGerente() {
 
     const handleEditProduto = (e) => {
         e.preventDefault();
-        navigate("/pedidos/pedidos-feitos", {
+        navigate("/acoes/lista-produto", {
             state: { 
                 from: location.pathname,
             }
@@ -104,7 +104,7 @@ function AcoesGerente() {
                                 <IoIosArrowForward />
                             </div>
                         </div>
-                        <div className="sairConta" onClick={handleEditFuncionario}>
+                        <div className="sairConta" onClick={handleEditProduto}>
                             <div>
                                 <MdModeEdit /> Edição de Produto
                             </div>
