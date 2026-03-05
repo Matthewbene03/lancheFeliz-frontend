@@ -43,7 +43,7 @@ function ListaFuncionarios() {
     }
 
     const handleEditUsuario = (e, usuario) => {
-        navigate("/acoes/edit-funcionario", {
+        navigate("/acoes/lista-funcionario/edit-funcionario", {
             state: {
                 from: location.pathname,
                 usuario

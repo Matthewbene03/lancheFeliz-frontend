@@ -48,11 +48,11 @@ function AppRoutes() {
             <Route exact path="/register" element={<Register/>} />
             <Route exact path="/edit" element={<Edit/>} />
             <Route exact path="/acoes/cadastro-funcionario" element={<CadastroFuncionario/>} />
-            <Route exact path="/acoes/edit-funcionario" element={<EditFuncionario/>} />
+            <Route exact path="/acoes/lista-funcionario" element={<ListaFuncionarios/>} />
+            <Route exact path="/acoes/lista-funcionario/edit-funcionario" element={<EditFuncionario/>} />
             <Route exact path="/acoes/cadastro-produto" element={<CadastroProduto/>} />
             <Route exact path="/acoes/edit-produto" element={<EditProduto/>} />
             <Route exact path="/acoes/lista-usuarios" element={<ListaUsuarios/>} />
-            <Route exact path="/acoes/lista-funcionario" element={<ListaFuncionarios/>} />
             <Route path="*" element={<Error404 />} />
         </Routes>
     );
