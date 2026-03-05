@@ -11,7 +11,7 @@ import axios from "../../config/axios";
 import * as TiposUsuarios from "../../config/TiposUsuarios"
 import { get } from "lodash";
 
-function ListaUsuarios() {
+function ListaFuncionarios() {
     const [usuarios, setUsuarios] = useState([]);
 
     const { isLoggedIn } = useSelector(state => state.authorization); //Recebe um sinal, tiver usuário logado;
@@ -29,7 +29,7 @@ function ListaUsuarios() {
         try {
             const { data } = await axios.get("/usuario")
             const usuariosFilter = data.filter((usuario) => {
-                return usuario.ativo === true && usuario.tipo !== TiposUsuarios.Gerente
+                return usuario.ativo === true && usuario.tipo !== TiposUsuarios.Gerente && usuario.tipo !== TiposUsuarios.Cliente
             });
             setUsuarios(usuariosFilter)
         } catch (e) {
@@ -82,14 +82,14 @@ function ListaUsuarios() {
                                         <p>Tipo: <span>{nomeProprio(usuario.tipo)}</span></p>
                                     </div>
                                 </div>
-                                {/* <div className="btnEditExcluir">
+                                <div className="btnEditExcluir">
                                     <div className="btnEdit" onClick={(e) => handleEditUsuario(e, usuario)}>
                                         <FaUserEdit /> Editar
                                     </div>
                                     <div className="btnExcluir" onClick={(e) => handleExcluirUsuario(e, usuario.id)}>
                                         <MdDelete /> Deletar
                                     </div>
-                                </div> */}
+                                </div>
                             </Card>
                         )) :
                             <ParagrafoSemProduto>
@@ -111,4 +111,4 @@ function ListaUsuarios() {
     )
 }
 
-export default ListaUsuarios;
+export default ListaFuncionarios;

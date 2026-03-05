@@ -22,6 +22,7 @@ import EditProduto from "../Pages/EditProduto/index";
 import Register from "../Pages/Register/index";
 import Edit from "../Pages/Edit/index";
 import ListaUsuarios from "../Pages/ListaUsuarios/index";
+import ListaFuncionarios from "../Pages/ListaFuncionarios/index";
 import Error404 from "../Pages/Error404/index"
 
 import PrivateRoute from "./PrivateRoutes";
@@ -51,6 +52,7 @@ function AppRoutes() {
             <Route exact path="/acoes/cadastro-produto" element={<CadastroProduto/>} />
             <Route exact path="/acoes/edit-produto" element={<EditProduto/>} />
             <Route exact path="/acoes/lista-usuarios" element={<ListaUsuarios/>} />
+            <Route exact path="/acoes/lista-funcionario" element={<ListaFuncionarios/>} />
             <Route path="*" element={<Error404 />} />
         </Routes>
     );

@@ -29,7 +29,7 @@ function AcoesGerente() {
 
     const handleEditFuncionario = (e) => {
         e.preventDefault();
-        navigate("/acoes/edit-funcionario", {
+        navigate("/acoes/lista-funcionario", {
             state: {
                 from: location.pathname,
             }
