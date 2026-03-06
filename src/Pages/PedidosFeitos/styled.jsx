@@ -58,6 +58,7 @@ export const Card = styled.div`
     
     height: auto;
     width: 100%;
+    border-top: 2px solid ${colors.PrimeiraCorClara};
     /* border: 2px solid red; */
     
     div.textoProduto{
@@ -69,9 +70,8 @@ export const Card = styled.div`
         gap: 0px;
         height: 100%;
         width: 100%;
-        padding: 5px 0px;
-        border-top: 2px solid ${colors.PrimeiraCorClara};
-        border-bottom: 2px solid ${colors.PrimeiraCorClara};
+        padding: 20px 0px;
+        padding-right: 10px;
     }
     
     div.textoProduto div{
@@ -109,17 +109,47 @@ export const Card = styled.div`
         color: ${colors.CorCinzaEscuro};
     }
     
-    div.textoProduto div p.preco{
+    div.textoProduto p.preco{
         font-size: 20px;
         font-weight: 500;
         color: ${colors.CorVerde};
         text-align: right;
-
+        
         width: 100%;
         padding: 10px 15px;
         background-color: ${colors.CorCinza};
         margin-bottom: 0px;
         border-radius: 5px;
+    }
+
+    div.textoProduto #pedidoFinalizado{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        margin:10px 0px;
+        /* border: 2px solid red; */
+    }
+    
+    div.textoProduto #pedidoFinalizado button#btnFinalizarPedido{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        
+        font-size: 20px;
+        font-weight: 500;
+        color: ${colors.CorCinzaClaro};
+        text-align: right;
+
+        background-color: ${colors.SegundaCorClara};
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
     }
 `;
 

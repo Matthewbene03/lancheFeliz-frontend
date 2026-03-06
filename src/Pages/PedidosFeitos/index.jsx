@@ -2,13 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaRegSadCry } from "react-icons/fa";
 import { FaRegFrown } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Div, Cabecalho, LinkLogin, AcoesUsuario, CabecalhoSemLogin, ContainerPedidos, Card, ParagrafoSemProduto } from "./styled"
 import axios from "../../config/axios";
 import * as StatusPedidos from "../../config/StatusPedidos"
+import * as TiposUsuarios from "../../config/TiposUsuarios"
 import { get } from "lodash";
+
+//Função Auxiliar
+function dataAtual(data) {
+    return new Date(data).toDateString() === new Date().toDateString();
+}
 
 function PedidosFeitos() {
     const [pedidos, setPedidos] = useState([]);
@@ -22,23 +29,43 @@ function PedidosFeitos() {
     useEffect(() => {
         if (effectRan.current) return;
         effectRan.current = true;
-        async function getPedidos() {
-            try {
-                const { data } = await axios.get("/servico")
-                const pedidosFilter = data.filter((pedido) => {
-                    return pedido.status === statusPedido
-                });
-                setPedidos(pedidosFilter)
-            } catch (e) {
-                const errors = get(e, "response.data.erros", []);
-                errors.map(error => toast.error(error))
-            }
-        }
         getPedidos();
     }, [])
 
+    async function getPedidos() {
+        try {
+            const { data } = await axios.get("/servico")
+            const pedidosFilter = data.filter((pedido) => {
+                return pedido.status === statusPedido
+            });
+            const pedidosFilterData = pedidosFilter.filter((pedido) => {
+                return dataAtual(pedido.tempoInicioPreparo) || dataAtual(pedido.tempoFimPreparo)
+            });
+            setPedidos(pedidosFilterData)
+        } catch (e) {
+            const errors = get(e, "response.data.erros", []);
+            errors.map(error => toast.error(error))
+        }
+    }
+
     function formatarData(data) {
         return new Date(data).toLocaleString("pt-BR");
+    }
+
+    const handleFinalizarPedido = async (e, idPedido) => {
+        e.preventDefault();
+
+        try {
+            const { data } = await axios.put(`/servico/${idPedido}`, {
+                status: StatusPedidos.Finalizado,
+                tempoFimPreparo: new Date().toISOString()
+            })
+            toast.success("Pedido finalizado!")
+            getPedidos();
+        } catch (e) {
+            console.log(e.response?.data)
+            toast.error("Error")
+        }
     }
 
     return (
@@ -72,13 +99,19 @@ function PedidosFeitos() {
                                             {statusPedido === StatusPedidos.Finalizado ? (
                                                 <p>Data e horário de finalização do pedido: <span>{formatarData(pedido.tempoFimPreparo)} </span> </p>
                                             ) : ("")}
-                                            <p className="preco">Valor total R$ {pedido.valorTotal}</p>
                                         </div>
+                                        {(user.tipo === TiposUsuarios.Cozinha) &&
+                                            <div id="pedidoFinalizado">
+                                                <button id="btnFinalizarPedido" onClick={e => handleFinalizarPedido(e, pedido.id)}>
+                                                    <IoSend /> Finalizar pedido
+                                                </button>
+                                            </div>}
+                                        <p className="preco">Valor total R$ {pedido.valorTotal}</p>
                                     </div>
                                 </Card>
                             )) :
                                 <ParagrafoSemProduto>
-                                    {statusPedido === StatusPedidos.EmAndamento ? ("Não tem pedidos em andamento") : ("Não tem pedidos finalizados")}
+                                    {statusPedido === StatusPedidos.EmAndamento ? ("Não tem pedidos em andamento no dia") : ("Não tem pedidos finalizados no dia")}
                                     <FaRegFrown />
                                 </ParagrafoSemProduto>}
                         </ContainerPedidos>
