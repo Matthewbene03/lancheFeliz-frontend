@@ -11,6 +11,13 @@ export const Container = styled.nav`
   justify-content: space-between;
   padding: 20px 100px;
   background-color: ${colors.PrimeiraCorClara};
+
+  .titulo{
+    text-align: center;
+    width: 100%;
+    /* border: 2px solid red; */
+  }
+
 `;
 
 export const Title1 = styled.h1`

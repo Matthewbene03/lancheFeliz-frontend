@@ -12,13 +12,9 @@ function NavMenu() {
         <Container>
             {(user.tipo === TiposUsuarios.Caixa || user.tipo === TiposUsuarios.Cozinha || user.tipo === TiposUsuarios.Gerente) ? (
                 <>
-                    <Link to={"/"}> <Title1> LancheFeliz </Title1></Link>
-                    <Categoria>
-                        <LinkCategoria to={"/assados"}> Assados </LinkCategoria>
-                        <LinkCategoria to={"/bebidas"}> Bebidas </LinkCategoria>
-                        <LinkCategoria to={"/pizzas"}> Pizzas </LinkCategoria>
-                        <LinkCategoria to={"/saldados"}> Salgados </LinkCategoria>
-                    </Categoria>
+                    <Link to={"/"} className="titulo"> 
+                        <Title1> LancheFeliz </Title1>
+                    </Link>
                 </>
             ) : (
                 <>
