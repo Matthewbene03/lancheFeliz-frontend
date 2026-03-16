@@ -18,7 +18,7 @@ export const Div = styled.div`
 
         overflow: auto;
         
-        gap: 30px;
+        gap: 10px;
         height: 60vh;
         width: 50vw;
         box-shadow: 0px 0px 40px ${colors.PrimeiraCorEscura};
@@ -36,15 +36,56 @@ export const Title1 = styled.h1`
     color: ${colors.SegundaCorEscura};
 
     width: 80%;
+    /* border: 2px solid red; */
 `;
 
 export const Form = styled.form`
-    flex: 70%;
+    flex: 90%;
+
     width: 80%;
     padding-bottom: 50px;
     padding-right: 15px;
     overflow:auto;
-    /* border: 2px solid red; */
+    
+    #fotoProduto{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        
+        width: auto;
+        margin-bottom: 20px;
+        overflow:hidden;
+        /* border: 2px solid red; */
+        /* border-radius: 50% */
+    }
+
+    #fotoProduto div{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        
+        height: 150px;
+        width: 150px;
+        overflow:hidden;
+        /* cursor: pointer; */
+        border-radius: 50%;
+        border: 1.5px dashed ${colors.CorCinza};
+    }
+    
+    #fotoProduto div img{
+        height: 100%;
+        width: 100%;
+    }
+
+    #fotoProduto div p{
+        text-align: center;
+        font-size: 20px;
+    }
 
     label{
         display: flex;
@@ -58,6 +99,29 @@ export const Form = styled.form`
         font-family: "Roboto", sans-serif;
         font-weight: 500;
         color: ${colors.SegundaCorEscura};
+    }
+    
+    #fotoProduto #labelArquivofoto{
+        /*Editar o label para arquivo de fotos*/
+        flex-direction: row;
+        align-items: center;
+        font-size: 20px;
+        color: ${colors.CorCinzaClaro};
+        background-color: ${colors.SegundaCorClara};
+        border-radius: 10px;
+        padding: 10px 20px;
+        transition: 300ms;
+        cursor: pointer;
+        /* border: 2px solid red; */
+    }
+    
+    #fotoProduto #labelArquivofoto:hover{
+        filter: brightness(1.2);
+    }
+
+    #fotoProduto #labelArquivofoto input{
+        display: none;
+        border: none;
     }
 
     input, select{

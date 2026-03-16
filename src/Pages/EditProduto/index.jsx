@@ -3,11 +3,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { isNumeric } from "validator"
+import { AiFillPicture } from "react-icons/ai";
+import { RiImageAddFill } from "react-icons/ri";
 
 import { Div, Form, Title1 } from "./styled"
 import * as TiposProdutos from "../../config/TiposProdutos"
 import * as actions from "../../store/modules/authorization/actions"
 import axios from "../../config/axios"
+import { get } from "lodash";
 
 function EditProduto() {
     const location = useLocation();
@@ -18,20 +21,18 @@ function EditProduto() {
     const [preco, setPreco] = useState(String(produto.preco));
     const [tempoPreparo, setTempoPreparo] = useState(String(tempoMinutos));
     const [tipoProduto, setTipoProduto] = useState(produto.categoria);
-
-    const tempo = converterMiliSegundosMinutos(produto.tempoPreparo);
+    const [fotoCaminho, setFotoCaminho] = useState("");
+    const [foto, setFoto] = useState({});
 
     const navigate = useNavigate();
     const from = location.state?.from || "/"
     const isLoggedIn = useSelector(state => state.authorization.isLoggedIn);
 
     useEffect(() => {
-        function mudarRota() {
-            if (!isLoggedIn) {
-                navigate("/login")
-            }
+        function setFoto() {
+            setFotoCaminho(get(produto, "Fotos[0].url", ""))
         }
-        mudarRota();
+        setFoto();
     }, [isLoggedIn, navigate]);
 
     const handleSubmit = async (e) => {
@@ -67,16 +68,20 @@ function EditProduto() {
             tempoPreparo: novoTempoPreparo
         }
 
-        // console.log(produto.id)
+        const formData = new FormData();
+        formData.append("produto_id", produto.id);
+        formData.append("arquivo", foto);
 
         try {
-            const { data } = await axios.put(`produto/${produto.id}`, novoProduto)
-            console.log(data)
+            await axios.post("/foto", formData, {
+                "Content-Type": "multipart/form-data"
+            })
+            await axios.put(`produto/${produto.id}`, novoProduto)
             toast.success("Edição realizada")
             navigate(from, { replace: true })
         } catch (e) {
-            toast.error("Error")
-            console.log(e);
+            const errors = get(e, "response.data.errors", []);
+            errors.map(error => toast.error(error))
         }
     }
 
@@ -85,9 +90,17 @@ function EditProduto() {
         return novoTempoSegundos
     }
 
-    function converterMiliSegundosMinutos (tempo) {
+    function converterMiliSegundosMinutos(tempo) {
         const novoTempoSegundos = (tempo) / (60 * 1000);
         return novoTempoSegundos
+    }
+
+    const handleFoto = async (e) =>{
+        const file = e.target.files[0];
+        const fotoURL = URL.createObjectURL(file);
+
+        setFoto(file);
+        setFotoCaminho(fotoURL);
     }
 
     return (
@@ -95,6 +108,16 @@ function EditProduto() {
             <div className="container">
                 <Title1>Edita os dados do produto</Title1>
                 <Form onSubmit={handleSubmit}>
+                    <div id="fotoProduto">
+                        <div>
+                            {fotoCaminho ? (<img src={fotoCaminho} alt="" />) : (<p> Sem foto. <br />Adicione! <br/> <RiImageAddFill/> </p>)}
+                        </div>
+                        <label id="labelArquivofoto" htmlFor="arquivofoto">
+                            {/*Editar o label para arquivo de fotos*/}
+                            Selecione uma foto <AiFillPicture className="fillPicture"/>
+                            <input type="file" id="arquivofoto" onChange={handleFoto}/>
+                        </label>
+                    </div>
                     <label>
                         Nome:
                         <input type="text" value={nome} onChange={e => setNome(e.target.value)} placeholder="Digite o nome do produto" />

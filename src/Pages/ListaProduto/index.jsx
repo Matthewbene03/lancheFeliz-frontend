@@ -28,7 +28,6 @@ function ListaProduto() {
     async function getProdutos() {
         try {
             const { data } = await axios.get("/produto")
-            console.log(data)
             const produtosFilter = data.filter((produto) => {
                 return produto.ativo === true
             });
