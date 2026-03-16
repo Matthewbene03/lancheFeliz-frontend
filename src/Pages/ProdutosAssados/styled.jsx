@@ -99,7 +99,6 @@ export const Card = styled.div`
         align-items: center;
         justify-content: center;
 
-        /* border: 2px solid red; */
         border-top: 2px solid ${colors.PrimeiraCorClara};
     }
 
@@ -107,6 +106,12 @@ export const Card = styled.div`
         height: 80%;
         width: 80%;
         border-radius: 15px;
+    }
+
+    #NotImg{
+        color: ${colors.SegundaCorClara};
+        height: 80%;
+        width: 80%;
     }
 `;
 

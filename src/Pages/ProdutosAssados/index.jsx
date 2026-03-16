@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { get } from "lodash";
 import { FaRegFrown } from "react-icons/fa";
+import { MdOutlineImageNotSupported } from "react-icons/md";
+
 
 import { Div, Title1, ContainerCard, Card, ParagrafoSemProduto, ContainerItens } from "./styled"
 import * as TiposProdutos from "../../config/TiposProdutos"
@@ -26,7 +28,7 @@ function ProdutosAssados() {
         async function getProdutosAssados() {
             const { data } = await axios.get("/produto")
             const produtosFilter = data.filter((produto) => {
-                return produto.categoria === TiposProdutos.Assados
+                return produto.categoria === TiposProdutos.Assados && produto.ativo === true
             });
             const dadosCompra = produtosFilter.map((produto) => {
                 return { idProduto: produto.id, qtdItens: 1, valorCompra: produto.preco }
@@ -104,7 +106,7 @@ function ProdutosAssados() {
                                 </ContainerItens>
                             </div>
                             <div className="imagemProduto">
-                                <img src="../../../public/vite.svg" />
+                                {get(produto, "Fotos[0].url", "") ? (<img src={produto.Fotos[0].url}/>) : (<MdOutlineImageNotSupported id="NotImg" />)}
                             </div>
                         </Card>
                     )) :
@@ -113,7 +115,7 @@ function ProdutosAssados() {
                             <FaRegFrown />
                         </ParagrafoSemProduto>}
                 </ContainerCard>
-                <footer>Area do footer</footer>
+                <footer></footer>
             </div>
         </Div>
     )
